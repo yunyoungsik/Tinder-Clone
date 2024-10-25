@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema({
   ],
 });
 
-userSchema.pre("save", async function (next) {
+userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, 10); // 비밀번호를 해시화(암호화)하여 저장
   next(); // 다음 미들웨어로 진행
 });

@@ -3,6 +3,16 @@
 
 ## backend
 ```
-npm i express dotenv mogoose jsonwebtoken cloudinary cookie-parser bcryptjs socket.io
+npm i express dotenv mongoose jsonwebtoken cloudinary cookie-parser bcryptjs socket.io
 npm i nodemon -D
+```
+
+## client
+```
+npm create vite@latest .
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+npm i react-router-dom react-hot-toast axios zustand
 ```

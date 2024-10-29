@@ -1,20 +1,35 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Toaster } from 'react-hot-toast';
+
+// store
+import { useAuthStore } from './store/useAuthStore';
 
 // pages
-import Homepage from "./pages/Homepage";
-import AuthPage from "./pages/AuthPage";
-import ProfilePage from "./pages/ProfilePage";
-import ChatPage from "./pages/ChatPage";
+import Homepage from './pages/Homepage';
+import AuthPage from './pages/AuthPage';
+import ProfilePage from './pages/ProfilePage';
+import ChatPage from './pages/ChatPage';
 
 function App() {
+  const { checkAuth, authUser, checkingAuth } = useAuthStore();
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  if (checkingAuth) return null;
+
   return (
-    <div className='absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]'>
-     <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/auth" element={<AuthPage />} />
-      <Route path="/profile" element={<ProfilePage />} />
-      <Route path="/chat/:id" element={<ChatPage />} />
-     </Routes>
+    <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
+      <Routes>
+        <Route path="/" element={authUser ? <Homepage /> : <Navigate to={'/auth'} />} />
+        <Route path="/auth" element={!authUser ? <AuthPage /> : <Navigate to={'/'} />} />
+        <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to={'/auth'} />} />
+        <Route path="/chat/:id" element={authUser ? <ChatPage /> : <Navigate to={'/auth'} />} />
+      </Routes>
+
+      <Toaster />
     </div>
   );
 }

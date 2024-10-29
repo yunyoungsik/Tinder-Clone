@@ -1,5 +1,13 @@
+import { useAuthStore } from '../store/useAuthStore';
+
 const Homepage = () => {
-  return <div>Homepage</div>;
+  const { logout } = useAuthStore();
+
+  return (
+    <div>
+      <button onClick={logout}>logout</button>
+    </div>
+  );
 };
 
 export default Homepage;

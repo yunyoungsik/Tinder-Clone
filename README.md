@@ -5,6 +5,7 @@
 ```
 npm i express dotenv mongoose jsonwebtoken cloudinary cookie-parser bcryptjs socket.io
 npm i nodemon -D
+npm i cors
 ```
 
 ## client

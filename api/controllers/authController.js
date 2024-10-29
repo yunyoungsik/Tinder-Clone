@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import jwt from 'jsonwebtoken';
 
 const signToken = (id) => {
   // jwt token
@@ -32,7 +32,7 @@ export const signup = async (req, res) => {
       });
     }
 
-    const newUser = new User.create({
+    const newUser = await User.create({
       name,
       email,
       password,
@@ -52,11 +52,10 @@ export const signup = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      token,
       user: newUser,
     });
   } catch (error) {
-    console.log('Error in signup controller: ', error);
+    console.log('Error in signup controller:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
@@ -93,11 +92,11 @@ export const login = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log('Error in login controller: ', error);
+    console.log('Error in login controller:', error);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
 export const logout = async (req, res) => {
   res.clearCookie('jwt');
-  req.status(200).json({ success: true, message: 'Logged out successfully' });
+  res.status(200).json({ success: true, message: 'Logged out successfully' });
 };

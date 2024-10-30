@@ -16,4 +16,5 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 
 npm i react-router-dom react-hot-toast axios zustand
+npm i lucide-react
 ```

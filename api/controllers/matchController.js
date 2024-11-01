@@ -61,7 +61,7 @@ export const swipeLeft = async (req, res) => {
 };
 export const getMatches = async (req, res) => {
   try {
-    const user = await User.findById(req, user.id).populate('matches', 'name image');
+    const user = await User.findById(req.user.id).populate('matches', 'name image');
     // 'matches' 필드에 저장된 참조된 문서의 'name'과 'image' 필드만 가져옴
     // 1. findById(req.user.id): 요청한 사용자의 ID로 User 컬렉션에서 해당 사용자를 조회합니다.
     // 2. populate('matches', 'name image'):
@@ -78,7 +78,7 @@ export const getMatches = async (req, res) => {
 
     res.status(500).json({
       success: false,
-      message: 'Error in getMatches',
+      message: 'Internal server error',
     });
   }
 };

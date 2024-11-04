@@ -4,8 +4,8 @@ import { getMatches, getUserProfiles, swipeLeft, swipeRight } from '../controlle
 
 const router = express.Router();
 
-router.post('/swipe-right/:liedUserId', protectRoute, swipeRight);
-router.post('/swipe-left/:disliedUserId', protectRoute, swipeLeft);
+router.post("/swipe-right/:likedUserId", protectRoute, swipeRight);
+router.post("/swipe-left/:dislikedUserId", protectRoute, swipeLeft);
 
 router.get('/', protectRoute, getMatches)
 router.get('/user-profiles', protectRoute, getUserProfiles)

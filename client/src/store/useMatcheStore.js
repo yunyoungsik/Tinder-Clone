@@ -7,6 +7,7 @@ export const useMatchStore = create((set) => ({
   isLoadingMyMatches: false,
   isLoadingUserProfiles: false,
   userProfiles: [],
+  swipeFeedback: null,
 
   getMyMatches: async () => {
     try {
@@ -30,6 +31,29 @@ export const useMatchStore = create((set) => ({
       toast.error(error.response.data.message || 'Something went wrong');
     } finally {
       set({ isLoadingUserProfiles: false });
+    }
+  },
+  
+  swipeLeft: async (user) => {
+    try {
+      set({ swipeFeedback: 'passed' });
+      await axiosInstance.post('/matches/swipe-left/' + user._id);
+    } catch (error) {
+      console.log(error);
+      toast.error('Failed to swipe left');
+    } finally {
+      setTimeout(() => set({ swipeFeedback: null }), 1500);
+    }
+  },
+  swipeRight: async (user) => {
+    try {
+      set({ swipeFeedback: 'liked' });
+      await axiosInstance.post('/matches/swipe-right/' + user._id);
+    } catch (error) {
+      console.log(error);
+      toast.error('Failed to swipe right');
+    } finally {
+      setTimeout(() => set({ swipeFeedback: null }), 1500);
     }
   },
 }));

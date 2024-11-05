@@ -4,25 +4,25 @@ import { Link } from 'react-router-dom';
 import { useMatchStore } from '../store/useMatcheStore';
 
 const Sidebar = () => {
-  const { isOpen, setIsOpen } = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => setIsOpen(!isOpen);
 
   const { getMyMatches, matches, isLoadingMyMatches } = useMatchStore();
 
   useEffect(() => {
-		getMyMatches();
-	}, [getMyMatches]);
+    getMyMatches();
+  }, [getMyMatches]);
 
   return (
     <>
       <div
         className={`
-  fixed inset-y-0 left-0 z-10 w-64 bg-white shadow-md overflow-hidden transition-transform duration-300
-   ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-        lg:translate-x-0 lg:static lg:w-1/4
-  `}
+		fixed inset-y-0 left-0 z-10 w-64 bg-white shadow-md overflow-hidden transition-transform duration-300
+		 ease-in-out
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          lg:translate-x-0 lg:static lg:w-1/4
+		`}
       >
         <div className="flex flex-col h-full">
           {/* Header */}
@@ -69,7 +69,6 @@ const Sidebar = () => {
     </>
   );
 };
-
 export default Sidebar;
 
 const NoMatchesFound = () => (

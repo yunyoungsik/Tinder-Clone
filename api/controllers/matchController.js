@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import { getConnectedUsers, getIO } from '../socket/socket.server.js';
 
 export const swipeRight = async (req, res) => {
   try {
@@ -31,6 +32,30 @@ export const swipeRight = async (req, res) => {
         // - 두 개의 저장 작업을 병렬로 실행하여 성능을 최적화합니다.
         // - 두 작업 중 하나라도 실패하면 전체 작업이 에러로 처리됩니다.
         // - await를 사용해 두 저장 작업이 완료될 때까지 기다립니다.
+
+        // socket.io를 사용하여 실시간으로 알림 전송
+        const connectedUsers = getConnectedUsers();
+        const io = getIO();
+
+        const likedUserSocketId = connectedUsers.get(likedUserId);
+        if (likedUserSocketId) {
+          io.to(likedUserSocketId).emit('newMatch'),
+            {
+              _id: currentUser._id,
+              name: currentUser.name,
+              image: currentUser.image,
+            };
+        }
+
+        const currentSocketId = connectedUsers.get(currentUser._id.toString());
+        if (currentSocketId) {
+          io.to(currentSocketId).emit('newMatch'),
+            {
+              _id: likedUser._id,
+              name: likedUser.name,
+              image: likedUser.image,
+            };
+        }
       }
     }
 

@@ -5,15 +5,23 @@ import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import SwipeArea from '../components/SwipeArea';
 import SwipeFeedback from '../components/SwipeFeedback';
+import { useAuthStore } from '../store/useAuthStore';
 
 const HomePage = () => {
-  const { isLoadingUserProfiles, getUserProfiles, userProfiles } = useMatchStore();
+  const { isLoadingUserProfiles, getUserProfiles, userProfiles, subscribeToNewMatches, unsubscribeFromNewMatches } = useMatchStore();
 
   useEffect(() => {
     getUserProfiles();
   }, [getUserProfiles]);
 
-  console.log(userProfiles);
+  const {authUser} = useAuthStore();
+
+  useEffect(() => {
+    authUser &&subscribeToNewMatches();
+    return () => {
+      unsubscribeFromNewMatches();
+    }
+  }, [subscribeToNewMatches, unsubscribeFromNewMatches, authUser]);
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-pink-100 to-purple-100 overflow-hidden">

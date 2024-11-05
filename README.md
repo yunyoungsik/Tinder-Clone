@@ -19,6 +19,6 @@ npm i react-router-dom react-hot-toast axios zustand
 npm i lucide-react
 npm i react-tinder-card
 npm i @react-spring/web
-
 npm i -D daisyui@latest
+npm i socket.io-client
 ```

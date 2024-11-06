@@ -6,7 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import { useAuthStore } from './store/useAuthStore';
 
 // pages
-import HomePage from './pages/HomePage';
+import { HomePage } from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import ProfilePage from './pages/ProfilePage';
 import ChatPage from './pages/ChatPage';

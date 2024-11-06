@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useMatchStore } from '../store/useMatcheStore';
+import { useMatchStore } from '../store/useMatchStore';
 import { Frown } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';

@@ -21,4 +21,5 @@ npm i react-tinder-card
 npm i @react-spring/web
 npm i -D daisyui@latest
 npm i socket.io-client
+npm i emoji-picker-react
 ```

@@ -1,4 +1,4 @@
-import { useMatchStore } from '../store/useMatcheStore';
+import { useMatchStore } from '../store/useMatchStore';
 
 const getFeedbackStyle = (swipeFeedback) => {
   if (swipeFeedback === 'liked') return 'text-green-500';

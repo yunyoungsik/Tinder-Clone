@@ -1,5 +1,5 @@
 import TinderCard from 'react-tinder-card';
-import { useMatchStore } from '../store/useMatcheStore';
+import { useMatchStore } from '../store/useMatchStore';
 
 const SwipeArea = () => {
   const { userProfiles, swipeRight, swipeLeft } = useMatchStore();
